@@ -7,8 +7,7 @@ logs/
 
 # Ignore screenshots and reports
 Screenshots/
-Reports/
-
+/Reports
 # Ignore IntelliJ IDEA project files
 .idea/
 *.iml
