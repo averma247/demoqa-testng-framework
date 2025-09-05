@@ -25,4 +25,5 @@ public class ExtentReportManager {
     public static ExtentTest getTest() {
         return test.get();
     }
+
 }
