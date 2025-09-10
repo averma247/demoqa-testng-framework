@@ -1,6 +1,7 @@
 package base;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import driver.DriverManager;
 import org.testng.Assert;
 import org.testng.ITestResult;
