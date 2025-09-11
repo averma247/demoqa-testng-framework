@@ -4,9 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.SeleniumActions;
 
 public class ElementsPage {
     WebDriver driver;
+    SeleniumActions actions;
 
     @FindBy(id = "userName")
     WebElement userNameInput;
@@ -17,13 +19,15 @@ public class ElementsPage {
     public ElementsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        actions = new SeleniumActions(driver);
+
     }
 
     public void enterUserName(String name) {
-        userNameInput.sendKeys(name);
+        actions.sendKeys(userNameInput,"Ajay");
     }
 
     public void clickSubmit() {
-        submitButton.click();
+        actions.click(submitButton);
     }
 }
