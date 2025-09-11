@@ -10,6 +10,9 @@ public class ElementsPage {
     WebDriver driver;
     SeleniumActions actions;
 
+    @FindBy(xpath = "//div[text()='Elements']")
+    private WebElement elementsCard;
+
     @FindBy(id = "userName")
     WebElement userNameInput;
 
@@ -21,6 +24,9 @@ public class ElementsPage {
         PageFactory.initElements(driver, this);
         actions = new SeleniumActions(driver);
 
+    }
+    public boolean checkElementsCardDisplayed() {
+        return actions.isElementDisplayed(elementsCard);
     }
 
     public void enterUserName(String name) {

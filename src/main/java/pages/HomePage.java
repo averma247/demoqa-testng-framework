@@ -25,7 +25,5 @@ public class HomePage {
         actions.scrollToElement(elementsCard);
         actions.click(elementsCard);
     }
-    public boolean checkElementsCardDisplayed() {
-        return actions.isElementDisplayed(elementsCard);
-    }
+
 }

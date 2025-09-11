@@ -4,10 +4,7 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.ElementsPage;
-import pages.HomePage;
 import reports.ExtentReportManager;
-import utils.LogUtil;
 
 public class DemoQATest extends BaseTest {
 
@@ -32,8 +29,9 @@ public class DemoQATest extends BaseTest {
 
     @Test
     public void testUserNameSubmission() throws InterruptedException {
+        ExtentReportManager.getTest().info("Navigated to Elements Page");
         homePage.clickElementsCard();
-        Assert.assertTrue(homePage.checkElementsCardDisplayed());
+        Assert.assertTrue(elementsPage.checkElementsCardDisplayed()," Elements page is not displayed");
 //        Thread.sleep(10000);
 //        elementsPage.enterUserName("Test User");
 //        elementsPage.clickSubmit();
