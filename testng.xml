@@ -1,6 +1,20 @@
-<suite name="DemoQA Suite" parallel="tests" thread-count="1">
-    <test name="Chrome Local">
+<suite name="Parallel Suite" parallel="tests" thread-count="3">
+    <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
+        <parameter name="isRemote" value="false"/>
+        <classes>
+            <class name="tests.DemoQATest"/>
+        </classes>
+    </test>
+    <test name="FirefoxTest">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="isRemote" value="false"/>
+        <classes>
+            <class name="tests.DemoQATest"/>
+        </classes>
+    </test>
+    <test name="EdgeTest">
+        <parameter name="browser" value="edge"/>
         <parameter name="isRemote" value="false"/>
         <classes>
             <class name="tests.DemoQATest"/>
