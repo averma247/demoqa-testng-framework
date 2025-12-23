@@ -40,6 +40,7 @@ public class BaseTest {
             ExtentReportManager.getTest().fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         }
         DriverManager.quitDriver();
+
     }
 
     @BeforeSuite
@@ -50,5 +51,6 @@ public class BaseTest {
     @AfterSuite
     public void afterSuite() {
         ExtentReportManager.flushReports();
+
     }
 }

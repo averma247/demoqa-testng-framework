@@ -13,6 +13,9 @@ public class ElementsPage {
     @FindBy(xpath = "//div[text()='Elements']")
     private WebElement elementsCard;
 
+    @FindBy(xpath="//span[text()='Text Box']")
+    private WebElement textBoxElement;
+
     @FindBy(id = "userName")
     WebElement userNameInput;
 
@@ -30,7 +33,11 @@ public class ElementsPage {
     }
 
     public void enterUserName(String name) {
-        actions.sendKeys(userNameInput,"Ajay");
+        actions.sendKeys(userNameInput,name);
+    }
+
+    public void clickTextBoxElement() {
+        actions.click(textBoxElement);
     }
 
     public void clickSubmit() {

@@ -32,9 +32,10 @@ public class DemoQATest extends BaseTest {
         ExtentReportManager.getTest().info("Navigated to Elements Page");
         homePage.clickElementsCard();
         Assert.assertTrue(elementsPage.checkElementsCardDisplayed()," Elements page is not displayed");
-//        Thread.sleep(10000);
-//        elementsPage.enterUserName("Test User");
-//        elementsPage.clickSubmit();
+        //Thread.sleep(10000);
+        elementsPage.clickTextBoxElement();
+        elementsPage.enterUserName("Test User");
+        elementsPage.clickSubmit();
 
         // Add assertions here
     }
