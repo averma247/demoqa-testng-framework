@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverManager {
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static void initDriver(String browser, boolean isRemote) throws MalformedURLException {
         if (driver.get() == null) {

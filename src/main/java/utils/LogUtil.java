@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 public class LogUtil {
-    private static Logger logger = Logger.getLogger(LogUtil.class);
+    private static final Logger logger = Logger.getLogger(LogUtil.class);
 
     static {
         PropertyConfigurator.configure("src/main/resources/log4j.properties");

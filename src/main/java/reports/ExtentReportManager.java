@@ -7,7 +7,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReportManager {
     private static ExtentReports extent;
-    private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
     public static void initReports() {
         extent = new ExtentReports();

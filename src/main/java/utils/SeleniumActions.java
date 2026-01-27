@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.*;
 import java.time.Duration;
 
 public class SeleniumActions {
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private Actions actions;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
+    private final Actions actions;
 
     public SeleniumActions(WebDriver driver) {
         this.driver = driver;

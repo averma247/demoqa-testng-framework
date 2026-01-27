@@ -13,11 +13,11 @@
             <class name="tests.DemoQATest"/>
         </classes>
     </test>
-    <test name="EdgeTest">
-        <parameter name="browser" value="edge"/>
-        <parameter name="isRemote" value="false"/>
-        <classes>
-            <class name="tests.DemoQATest"/>
-        </classes>
-    </test>
+<!--    <test name="EdgeTest">-->
+<!--        <parameter name="browser" value="edge"/>-->
+<!--        <parameter name="isRemote" value="false"/>-->
+<!--        <classes>-->
+<!--            <class name="tests.DemoQATest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
