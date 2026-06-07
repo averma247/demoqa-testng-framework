@@ -14,11 +14,20 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
 
   selenium-tests:
 
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     strategy:
       matrix:
@@ -82,3 +91,25 @@ jobs:
         with:
           name: logs
           path: logs/
+
+      # -------------------------------
+      # GitHub Pages Configuration
+      # -------------------------------
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare GitHub Pages Content
+        run: |
+          mkdir -p site
+          cp -r Reports/* site/ || true
+          cp -r test-output/* site/ || true
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
