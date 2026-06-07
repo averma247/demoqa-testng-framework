@@ -25,10 +25,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     strategy:
       matrix:
         browser: [chrome]
@@ -92,24 +88,29 @@ jobs:
           name: logs
           path: logs/
 
-      # -------------------------------
-      # GitHub Pages Configuration
-      # -------------------------------
+      # --------------------------------
+      # GitHub Pages Deployment
+      # Only deploy from master branch
+      # --------------------------------
 
       - name: Setup GitHub Pages
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: actions/configure-pages@v5
 
       - name: Prepare GitHub Pages Content
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: |
           mkdir -p site
           cp -r Reports/* site/ || true
           cp -r test-output/* site/ || true
 
       - name: Upload GitHub Pages Artifact
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         id: deployment
         uses: actions/deploy-pages@v4
