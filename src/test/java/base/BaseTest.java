@@ -1,9 +1,8 @@
 package base;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import driver.DriverManager;
-import org.testng.Assert;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -16,41 +15,84 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
-
 public class BaseTest {
-    protected String title;
+
     protected HomePage homePage;
     protected ElementsPage elementsPage;
+
     @Parameters({"browser", "isRemote"})
-    @BeforeMethod
-    public void setup(@Optional("chrome") String browser, @Optional("false") boolean isRemote, Method method) throws MalformedURLException {
+    @BeforeMethod(alwaysRun = true)
+    public void setup(
+            @Optional("chrome") String browser,
+            @Optional("false") boolean isRemote,
+            Method method
+    ) throws MalformedURLException {
+
+        // Initialize Driver
         DriverManager.initDriver(browser, isRemote);
-        homePage = new HomePage(DriverManager.getDriver());
-        elementsPage = new ElementsPage(DriverManager.getDriver());
-        DriverManager.getDriver().manage().window().maximize();
-        DriverManager.getDriver().get("https://demoqa.com");
-        title = DriverManager.getDriver().getTitle();
-        ExtentReportManager.createTest(method.getName());
+
+        WebDriver driver = DriverManager.getDriver();
+
+        // Browser Setup
+        driver.manage().window().maximize();
+
+        // Launch Application
+        driver.get("https://demoqa.com");
+
+        // Initialize Page Objects
+        homePage = new HomePage(driver);
+        elementsPage = new ElementsPage(driver);
+
+        // Create Extent Test
+        ExtentReportManager.createTest(
+                method.getName() + " [" + browser.toUpperCase() + "]"
+        );
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) throws IOException {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            String screenshotPath = ScreenshotUtil.captureScreenshot(result.getName());
-            ExtentReportManager.getTest().fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-        }
-        DriverManager.quitDriver();
 
+        if (ExtentReportManager.getTest() != null) {
+
+            switch (result.getStatus()) {
+
+                case ITestResult.FAILURE:
+
+                    String screenshotPath =
+                            ScreenshotUtil.captureScreenshot(result.getName());
+
+                    ExtentReportManager.getTest().fail(
+                            result.getThrowable(),
+                            MediaEntityBuilder
+                                    .createScreenCaptureFromPath(screenshotPath)
+                                    .build()
+                    );
+                    break;
+
+                case ITestResult.SUCCESS:
+
+                    ExtentReportManager.getTest().pass("Test Passed");
+                    break;
+
+                case ITestResult.SKIP:
+
+                    ExtentReportManager.getTest().skip("Test Skipped");
+                    break;
+            }
+        }
+
+        DriverManager.quitDriver();
     }
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void beforeSuite() {
+
         ExtentReportManager.initReports();
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void afterSuite() {
-        ExtentReportManager.flushReports();
 
+        ExtentReportManager.flushReports();
     }
 }
