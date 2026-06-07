@@ -135,8 +135,8 @@ jobs:
           subject: |
             Selenium TestNG Report - ${{ job.status }}
 
-          to: yourmail@gmail.com
-          from: GitHub Actions
+          to: ${{ vars.RECIPIENT_EMAIL }}
+          from: Ajay Automation <${{ secrets.EMAIL_USERNAME }}>
 
           body: |
             Automation Execution Completed.
