@@ -7,10 +7,7 @@ on:
       - master
       - workflow
 
-  pull_request:
-    branches:
-      - master
-      - develop
+
 
   workflow_dispatch:
 
