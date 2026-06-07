@@ -35,6 +35,7 @@ public class DemoQATest extends BaseTest {
         //Thread.sleep(10000);
         elementsPage.clickTextBoxElement();
         elementsPage.enterUserName("Test User");
+        ExtentReportManager.getTest().info("Entered username: Test User");
         elementsPage.clickSubmit();
 
         // Add assertions here

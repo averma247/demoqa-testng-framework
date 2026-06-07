@@ -1,17 +1,24 @@
+# Maven
+/target/
 
-# Ignore Maven target directory
-target/
-
-# Ignore logs directory
-logs/
-
-# Ignore screenshots and reports
-Screenshots/
-/Reports
-# Ignore IntelliJ IDEA project files
+# IntelliJ
 .idea/
 *.iml
 
-# Ignore OS-specific files
+# Reports
+Reports/
+logs/
+Screenshots/
+
+# OS files
 .DS_Store
 Thumbs.db
+
+# Selenium temp
+.selenium/
+
+# Test output
+/test-output/
+
+# Environment
+.env
